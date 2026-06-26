@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions | Tasse Cafe, Dunedin</title>
+<meta name="description" content="Terms and conditions for the Tasse Cafe website.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23241b14'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23b06a34' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Karla:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="nav scrolled" id="nav">
+  <a href="index.html" class="brand">Tasse<span class="dot">.</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#menu" class="lnk">Menu</a>
+    <a href="index.html#about" class="lnk">About</a>
+    <a href="index.html#visit" class="lnk">Visit</a>
+    <a href="tel:0275257770" class="btn btn-primary">Call 027 525 7770</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#e9b98a">Tasse Cafe</span>
+    <h1>Terms &amp; Conditions</h1>
+    <p>The basics of using this website. Placeholder content for the demo.</p>
+  </div>
+</header>
+
+<section class="section band-cream">
+  <div class="wrap prose">
+    <a href="index.html" class="back-link">← Back to home</a>
+    <p><em>Last updated: this is placeholder content prepared for the website demo.</em></p>
+
+    <h2>1. About these terms</h2>
+    <p>These terms cover your use of the Tasse Cafe website. By browsing the site you agree to them. If you don't agree, please don't use the site. This is sample wording for the demo and should be reviewed before going live.</p>
+
+    <h2>2. Information on this site</h2>
+    <p>We aim to keep menu items, hours and details accurate, but they may change without notice. Photos are illustrative. Pricing, availability and opening hours should be confirmed with us directly before relying on them.</p>
+
+    <h2>3. Enquiries and forms</h2>
+    <p>When you send an enquiry or feedback through this site, you're asking us to get in touch using the details you provide. Please make sure they're correct. Submitting a form does not create a confirmed booking until we reply to confirm it.</p>
+
+    <h2>4. Intellectual property</h2>
+    <p>The Tasse Cafe name, branding and the content on this site are the property of the business or its licensors and may not be reused without permission.</p>
+
+    <h2>5. Liability</h2>
+    <p>The site is provided "as is". To the extent permitted by New Zealand law, we're not liable for any loss arising from use of the site or reliance on its content. Nothing here limits rights you have under the Consumer Guarantees Act 1993.</p>
+
+    <h2>6. Links to other sites</h2>
+    <p>This site may link to third-party sites (for example, Google Maps or review pages). We're not responsible for their content or practices.</p>
+
+    <h2>7. Changes</h2>
+    <p>We may update these terms from time to time. The current version will always be the one published on this page.</p>
+
+    <h2>8. Contact</h2>
+    <p>Questions about these terms? Email <a href="mailto:tassecafe23@gmail.com">tassecafe23@gmail.com</a> or call <a href="tel:0275257770">027 525 7770</a>.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-bottom" style="border:0;padding-top:0">
+      <span>© <span id="yr"></span> Tasse Cafe · Dunedin, New Zealand</span>
+      <span><a href="privacy.html" style="color:rgba(255,255,255,.6)">Privacy Policy</a> · <a href="index.html" style="color:rgba(255,255,255,.6)">Home</a></span>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();
+  const t=document.getElementById('navToggle'),l=document.getElementById('navLinks'); t&&t.addEventListener('click',()=>l.classList.toggle('open'));</script>
+</body>
+</html>

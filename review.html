@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave a Review | Tasse Cafe, Dunedin</title>
+<meta name="description" content="Enjoyed your visit to Tasse Cafe? Let us know how we did.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23241b14'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23b06a34' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Karla:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .rv-wrap { min-height: 100vh; display: grid; place-items: center; background: var(--espresso); padding: 110px 20px 60px; text-align: center; }
+  .rv-card { background: var(--cream); border-radius: var(--radius-lg); padding: clamp(34px, 5vw, 60px); max-width: 600px; width: 100%; box-shadow: var(--shadow); }
+  .rv-card .eyebrow { color: var(--accent-deep); }
+  .rv-card h1 { font-size: clamp(2rem, 5vw, 2.9rem); margin: 14px 0 12px; }
+  .rv-card p.sub { color: var(--muted); margin-bottom: 30px; }
+  .star-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 26px; }
+  .star-row button { font-size: clamp(2.2rem, 9vw, 3.2rem); background: none; border: none; cursor: pointer; color: #d8d0c4; transition: transform .2s var(--ease), color .2s; line-height: 1; padding: 4px; }
+  .star-row button:hover { transform: translateY(-4px) scale(1.1); }
+  .star-row button.lit { color: #d99a4e; }
+  .hint { color: var(--muted); font-size: 0.9rem; min-height: 1.4em; transition: color .2s; }
+  .rv-back { margin-top: 26px; }
+  .rv-back a { color: var(--accent-deep); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="rv-wrap">
+  <div class="rv-card">
+    <span class="eyebrow">Tasse Cafe</span>
+    <h1>How was your visit?</h1>
+    <p class="sub">Tap a star to let us know — your feedback helps us keep the coffee and the welcome just right.</p>
+    <div class="star-row" id="stars">
+      <button data-v="1" aria-label="1 star">★</button>
+      <button data-v="2" aria-label="2 stars">★</button>
+      <button data-v="3" aria-label="3 stars">★</button>
+      <button data-v="4" aria-label="4 stars">★</button>
+      <button data-v="5" aria-label="5 stars">★</button>
+    </div>
+    <p class="hint" id="hint">Slide over the stars and tap your rating</p>
+    <div class="rv-back"><a href="index.html">← Back to Tasse Cafe</a></div>
+  </div>
+</div>
+<script>
+  // 4–5 stars → Google review; 1–3 → private feedback form
+  const GOOGLE_REVIEW_URL = "https://g.page/r/PLACEHOLDER/review";
+  const stars = document.querySelectorAll('#stars button');
+  const hint = document.getElementById('hint');
+  const labels = { 1:"We're sorry to hear that — tell us more", 2:"Not good enough — let us know what happened", 3:"Thanks — we'd love to know how to do better", 4:"Great! Taking you to Google…", 5:"Wonderful! Taking you to Google…" };
+  function paint(v){ stars.forEach(s => s.classList.toggle('lit', +s.dataset.v <= v)); hint.textContent = labels[v]; }
+  stars.forEach(s => {
+    s.addEventListener('mouseenter', () => paint(+s.dataset.v));
+    s.addEventListener('click', () => {
+      const v = +s.dataset.v; paint(v);
+      setTimeout(() => {
+        if (v >= 4) { window.location.href = GOOGLE_REVIEW_URL; }
+        else { window.location.href = "private.html?rating=" + v; }
+      }, 450);
+    });
+  });
+  document.getElementById('stars').addEventListener('mouseleave', () => { stars.forEach(s => s.classList.remove('lit')); hint.textContent = "Slide over the stars and tap your rating"; });
+</script>
+</body>
+</html>

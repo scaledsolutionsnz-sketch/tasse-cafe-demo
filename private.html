@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Feedback | Tasse Cafe, Dunedin</title>
+<meta name="description" content="Share private feedback with the Tasse Cafe team.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23241b14'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23b06a34' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Karla:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pv-wrap { min-height: 100vh; display: grid; place-items: center; background: var(--espresso); padding: 110px 20px 60px; }
+  .pv-card { background: var(--cream); border-radius: var(--radius-lg); padding: clamp(30px, 5vw, 52px); max-width: 580px; width: 100%; box-shadow: var(--shadow); }
+  .pv-card .eyebrow { color: var(--accent-deep); }
+  .pv-card h1 { font-size: clamp(1.8rem, 4.6vw, 2.5rem); margin: 12px 0 10px; }
+  .pv-card p.sub { color: var(--muted); margin-bottom: 26px; }
+  .rating-show { color: #d99a4e; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 22px; }
+  .success { display: none; text-align: center; }
+  .success.show { display: block; }
+  .success .tick { width: 72px; height: 72px; border-radius: 50%; background: rgba(176,106,52,0.15); color: var(--accent-deep); display: grid; place-items: center; margin: 0 auto 20px; }
+  .success .tick svg { width: 34px; height: 34px; }
+  .pv-back { margin-top: 22px; text-align: center; }
+  .pv-back a { color: var(--accent-deep); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="pv-wrap">
+  <div class="pv-card">
+    <div id="formView">
+      <span class="eyebrow">Tasse Cafe</span>
+      <h1>Tell us what happened</h1>
+      <p class="sub">Thanks for being honest — this comes straight to us, privately, so we can put it right.</p>
+      <div class="rating-show" id="ratingShow">★☆☆☆☆</div>
+      <form class="form" id="pvForm" action="https://formsubmit.co/tassecafe23@gmail.com" method="POST" style="box-shadow:none;padding:0;background:transparent">
+        <input type="hidden" name="_subject" value="Private feedback from Tasse Cafe website">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="rating" id="ratingField" value="">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" type="text" name="name" placeholder="First and last" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="feedback">What could we have done better?</label>
+          <textarea id="feedback" name="feedback" placeholder="Tell us about your visit — the coffee, the food, the service, anything." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send private feedback</button>
+      </form>
+    </div>
+    <div class="success" id="successView">
+      <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h1>Thank you</h1>
+      <p class="sub">We really appreciate you taking the time. The team will read this and use it to do better next time.</p>
+      <div class="pv-back"><a href="index.html">← Back to Tasse Cafe</a></div>
+    </div>
+    <div class="pv-back" id="backLink"><a href="review.html">← Back</a></div>
+  </div>
+</div>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  let rating = parseInt(params.get('rating'), 10);
+  if (isNaN(rating) || rating < 1 || rating > 5) rating = 3;
+  document.getElementById('ratingShow').textContent = '★★★★★☆☆☆☆☆'.slice(5 - rating, 10 - rating);
+  document.getElementById('ratingField').value = rating + ' star' + (rating === 1 ? '' : 's');
+
+  // Submit via fetch to show success state (no reCAPTCHA, FormSubmit AJAX endpoint)
+  const form = document.getElementById('pvForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    fetch('https://formsubmit.co/ajax/tassecafe23@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    }).then(() => showSuccess()).catch(() => showSuccess());
+  });
+  function showSuccess(){
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('backLink').style.display = 'none';
+    document.getElementById('successView').classList.add('show');
+  }
+</script>
+</body>
+</html>
